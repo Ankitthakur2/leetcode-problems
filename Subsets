@@ -1,0 +1,28 @@
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+  vector<vector<int>> v2;
+        vector<int> v3;
+   for(int i=0;i<(1<<nums.size());i++)
+   {
+       
+       for(int j=0;j<nums.size();j++)
+       {
+           if(i&(1<<j))
+           {
+               v3.push_back(nums[j]);
+           }
+           
+       }
+     v2.push_back(v3);
+       v3.clear();
+   }
+    
+    
+return v2;
+    }
+};
