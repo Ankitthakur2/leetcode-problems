@@ -1,0 +1,69 @@
+Given a string S, check if the letters can be rearranged so that two characters that are adjacent to each other are not the same.
+
+If possible, output any possible result.  If not possible, return the empty string.
+
+Example 1:
+
+Input: S = "aab"
+Output: "aba"
+Example 2:
+
+Input: S = "aaab"
+Output: ""
+Note:
+
+S will consist of lowercase letters and have length in range [1, 500].
+
+class Solution {
+public:
+    string reorganizeString(string S) {
+        unordered_map<char,int> m;
+        string str;
+        for(int i=0;i<S.length();i++)
+        {
+            if(m.find(S[i])!=m.end())
+            m[S[i]]++;
+            else
+                m[S[i]]=1;
+        }
+        
+        priority_queue<pair<int,char>> pmax;
+        
+        for(auto i=m.begin();i!=m.end();i++)
+        {
+            
+            pmax.push({i->second,i->first});
+        }
+        
+        while(!pmax.empty())
+        {
+            if(pmax.size()==1)
+            {
+                if(pmax.top().first==1)
+                     str.push_back(pmax.top().second);
+                else 
+                return "" ;
+                break;
+            }
+            
+            auto ele1=pmax.top();
+            pmax.pop();
+            auto ele2=pmax.top();
+            pmax.pop();
+            while(ele1.first && ele2.first)
+            {
+             str.push_back(ele1.second);
+                 ele1.first--;
+                str.push_back(ele2.second);
+                ele2.first--;
+            }
+            
+            if(ele1.first!=0)
+                pmax.push({ele1.first,ele1.second});
+            
+        }
+        
+        return str;
+        
+    }
+};
