@@ -1,0 +1,60 @@
+We are given two sentences s1 and s2.  (A sentence is a string of space separated words.  Each word consists only of lowercase letters.)
+
+A word is uncommon if it appears exactly once in one of the sentences, and does not appear in the other sentence.
+
+Return a list of all uncommon words. 
+
+You may return the list in any order.
+
+ 
+
+Example 1:
+
+Input: s1 = "this apple is sweet", s2 = "this apple is sour"
+Output: ["sweet","sour"]
+Example 2:
+
+Input: s1 = "apple apple", s2 = "banana"
+Output: ["banana"]
+ 
+
+Note:
+
+0 <= s1.length <= 200
+0 <= s2.length <= 200
+s1 and s2 both contain only spaces and lowercase letters.
+
+
+class Solution {
+public:
+    vector<string> uncommonFromSentences(string s1, string s2) {
+       vector<string> vs;
+        vector<string> v1;
+        vector<string> v2;
+        string str1;
+        string str2;
+         stringstream obj1(s1);
+        stringstream obj2(s2);
+        unordered_map<string,int> m;
+        while(obj1>>str1)
+            v1.push_back(str1);
+        
+        while(obj2>>str2)
+            v2.push_back(str2);
+        for(int i=0;i<v1.size();i++)
+            m[v1[i]]++;
+        for(int i=0;i<v2.size();i++)
+            m[v2[i]]++;
+        
+        for(auto i=m.begin();i!=m.end();i++)
+        {
+            if((i->second)==1)
+                vs.push_back((i->first));
+        }
+        
+        
+        
+        
+        return vs;
+    }
+};
