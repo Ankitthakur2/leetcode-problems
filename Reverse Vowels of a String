@@ -1,0 +1,48 @@
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both cases.
+
+ 
+
+Example 1:
+
+Input: s = "hello"
+Output: "holle"
+Example 2:
+
+Input: s = "leetcode"
+Output: "leotcede"
+ 
+
+Constraints:
+
+1 <= s.length <= 3 * 10^5
+s consist of printable ASCII characters.
+
+class Solution {
+public:
+    string reverseVowels(string s) {
+        vector<int> v1;
+        vector<int> v2;
+        
+        for(int i=0;i<s.length();i++)
+        {
+    if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u' || s[i]=='A'
+      || s[i]=='E' || s[i]=='I' || s[i]=='O' || s[i]=='U')
+            v1.push_back(i);
+        }
+        for(int i=s.length()-1;i>=0;i--)
+        {
+        if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u' || s[i]=='A'
+      || s[i]=='E' || s[i]=='I' || s[i]=='O' || s[i]=='U')    
+            v2.push_back(i);
+        }
+        int i=0;
+        while(i<v1.size()/2)
+        {
+            swap(s[v1[i]],s[v2[i]]);
+            i++;
+        }
+      return s;  
+    }
+};
